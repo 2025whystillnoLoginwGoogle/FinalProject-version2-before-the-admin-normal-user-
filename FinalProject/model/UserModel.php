@@ -6,9 +6,9 @@ class UserModel {
         $this->conn = $db;
     }
 
-    public function registerUser($firstName, $lastName, $email, $hashedPassword){
-        // Updated to use firstName and lastName
-        $query = "INSERT INTO tbl_users (firstName, lastName, email, password, createdAt, updatedAt) VALUES (:firstName, :lastName, :email, :password, :createdAt, :updatedAt)";
+    public function registerUser($firstName, $lastName, $email, $hashedPassword, $role){
+      
+        $query = "INSERT INTO tbl_users (firstName, lastName, email, password, role , createdAt, updatedAt) VALUES (:firstName, :lastName, :email, :password,  :role , :createdAt, :updatedAt)";
 
          $dateNow = date(format: 'Y-m-d H:i:s');
         $response = $this->conn->prepare($query);
@@ -16,6 +16,7 @@ class UserModel {
         $response->bindParam(":lastName", $lastName);
         $response->bindParam(":email", $email);
         $response->bindParam(":password", $hashedPassword);
+        $response->bindParam(":role", $role);
         $response->bindParam(":createdAt", $dateNow);
         $response->bindParam(":updatedAt", $dateNow);
         

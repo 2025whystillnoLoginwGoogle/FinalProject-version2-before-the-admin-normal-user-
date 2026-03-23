@@ -25,9 +25,16 @@
         <div class="input-group"><label>Last Name</label><input type="text" id="lastName" autocomplete="off" required></div>
         <div class="input-group"><label>Email</label><input type="email" id="email" autocomplete="off" required></div>
         
+        <div class="input-group">
+            <label>Account Type</label>
+            <select id="role" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; background: white;">
+                <option value="customer">Normal User</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+
         <div class="input-group"><label>Password</label><input type="password" id="password" autocomplete="new-password" required></div>
-        <div class="input-group"><label>Confirm Password</label><input type="password" id="confirmPassword" autocomplete="new-password" required></div>
-        
+        <div class="input-group"><label>Confirm Password</label><input type="password" id="confirmPassword" autocomplete="new-password" required></div>     
         <button class="btn" onclick="registerAppUser()">Sign Up</button>
         <a href="LoginPage.php" class="link">Already have an account? Log in</a>
     </div>

@@ -11,7 +11,7 @@ class UserManager {
         $this->userModel = new UserModel($db);
     }
 
-    public function registerFunc($firstName, $lastName, $email, $password, $confirmPassword) {
+    public function registerFunc($firstName, $lastName, $email, $password, $confirmPassword, $role) {
         if ($password !== $confirmPassword) {
             echo "Passwords do not match.";
             return;
@@ -19,7 +19,7 @@ class UserManager {
         
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        if ($this->userModel->registerUser($firstName, $lastName, $email, $hashedPassword)) {
+        if ($this->userModel->registerUser($firstName, $lastName, $email, $hashedPassword, $role)) {
             echo "Success!"; 
         } else {
             echo "Email is already registered or an error occurred.";
@@ -33,6 +33,7 @@ class UserManager {
             $_SESSION["user_firstName"] = $user['firstName'];
             $_SESSION["user_lastName"]  = $user['lastName'];
             $_SESSION["user_email"]     = $user['email'];
+            $_SESSION["user_role"]      = $user['role']; 
             echo "Success!"; 
         } else {
             echo "Invalid email or password.";

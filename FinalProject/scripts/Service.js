@@ -2,6 +2,7 @@ function registerAppUser() {
     var firstName = document.getElementById("firstName").value;
     var lastName = document.getElementById("lastName").value;
     var email = document.getElementById("email").value;
+    var role = document.getElementById("role").value;
     var password = document.getElementById("password").value;
     var confirmPassword = document.getElementById("confirmPassword").value;
 
@@ -18,6 +19,7 @@ function registerAppUser() {
             firstName: firstName,
             lastName: lastName,
             email: email,
+            role: role,
             password: password,
             confirmPassword: confirmPassword
         },
@@ -63,8 +65,8 @@ function loginAppUser() {
         }
     });
 }
-//bago added pls check
-// Automatically load users when the dashboard page opens
+//bago added check
+// automatically load users when the dashboard page opens
 $(document).ready(function() {
     if(window.location.pathname.includes("DashboardPage.php")) {
         loadUsers();
@@ -112,7 +114,7 @@ function deleteUser(id) {
                 success: function(response) {
                     if (response.trim() === "User has been deleted.") {
                         Swal.fire("Deleted!", "User has been removed.", "success");
-                        loadUsers(); // Refresh the table
+                        loadUsers(); 
                     }
                 }
             });
@@ -168,6 +170,7 @@ function addDashboardUser() {
             `<input id="swal-add-fname" class="swal2-input" placeholder="First Name" autocomplete="off">` +
             `<input id="swal-add-lname" class="swal2-input" placeholder="Last Name" autocomplete="off">` +
             `<input id="swal-add-email" type="email" class="swal2-input" placeholder="Email" autocomplete="off">` +
+            `<select id="swal-add-role" class="swal2-input" style="width: 260px;"><option value="customer">Normal User</option><option value="admin">Admin</option></select>` + // <-- DROPDOWN ADDED
             `<input id="swal-add-pass" type="password" class="swal2-input" placeholder="Password" autocomplete="new-password">` +
             `<input id="swal-add-cpass" type="password" class="swal2-input" placeholder="Confirm Password" autocomplete="new-password">`,
         focusConfirm: false,
@@ -179,6 +182,7 @@ function addDashboardUser() {
                 firstName: document.getElementById('swal-add-fname').value,
                 lastName: document.getElementById('swal-add-lname').value,
                 email: document.getElementById('swal-add-email').value,
+                role: document.getElementById('swal-add-role').value, 
                 password: document.getElementById('swal-add-pass').value,
                 confirmPassword: document.getElementById('swal-add-cpass').value
             }
@@ -186,7 +190,6 @@ function addDashboardUser() {
     }).then((result) => {
         if (result.isConfirmed) {
             let data = result.value;
-            // Reusing your existing registration logic perfectly!
             $.ajax({
                 url: "../controllers/Controller.php",
                 type: "POST",
@@ -195,9 +198,11 @@ function addDashboardUser() {
                     firstName: data.firstName,
                     lastName: data.lastName,
                     email: data.email,
+                    role: data.role,
                     password: data.password,
                     confirmPassword: data.confirmPassword
                 },
+  
                 success: function(response) {
                     if (response.trim() === "Success!") {
                         Swal.fire("Added!", "New user has been created.", "success");

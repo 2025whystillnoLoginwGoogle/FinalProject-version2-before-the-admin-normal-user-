@@ -6,7 +6,7 @@ $usermanager = new UserManager();
 
 if (isset($_POST["action"])) {
     if ($_POST["action"] == "register") {
-        $usermanager->registerFunc($_POST["firstName"], $_POST["lastName"], $_POST["email"], $_POST["password"], $_POST["confirmPassword"]);
+        $usermanager->registerFunc($_POST["firstName"], $_POST["lastName"], $_POST["email"], $_POST["password"], $_POST["confirmPassword"], $_POST["role"]);
         exit;
     } 
     else if ($_POST["action"] == "login") {

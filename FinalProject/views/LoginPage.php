@@ -21,8 +21,8 @@
 <body>
     <div class="card">
         <h2>McBank Login</h2>
-        <div class="input-group"><label>Email</label><input type="email" id="email" required></div>
-        <div class="input-group"><label>Password</label><input type="password" id="password" required></div>
+        <div class="input-group"><label>Email</label><input type="email" id="email" autocomplete="off" required></div>
+        <div class="input-group"><label>Password</label><input type="password" id="password" autocomplete="new-password" required></div>
         <button class="btn" onclick="loginAppUser()">Log In</button>
         <a href="RegistrationPage.php" class="link">New here? Create an account</a>
     </div>
